@@ -6,6 +6,7 @@ class WebsiteContent:
         self.headings = ""
         self.texts = []
         self.footer = ""
+        self.images = []
 
     def to_dict(self):
         return {
@@ -15,4 +16,5 @@ class WebsiteContent:
             "headings": self.headings,
             "texts": self.texts,
             "footer": self.footer,
+            "images": self.images
         }

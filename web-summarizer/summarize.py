@@ -25,7 +25,7 @@ def gpt(website_content):
     if website_content['footer']:
         prompt += (f'Footer of the page: {website_content['footer']}\n\n')
     if website_content['images']:
-        prompt += (f'Images of the page (alt text): {website_content["visuals"]}\n\n')
+        prompt += (f'Images of the page (alt text): {website_content["images"]}\n\n')
 
     completion = client.chat.completions.create(
     model="gpt-4o",

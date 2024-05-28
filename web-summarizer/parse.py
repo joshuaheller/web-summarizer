@@ -1,12 +1,10 @@
 
 def language(soup):
-    # Extract the language of the page
     lang = soup.html.get('lang')
     print(f'Language of the page: {lang}\n')
     return lang
 
 def title(soup):
-    # Extract the title of the page
     title = soup.title.string
     print(f'Title of the page: {title}\n')
     return title
@@ -27,11 +25,14 @@ def texts(soup):
     print(f'Texts of the page after filtering: {filtered_texts}\n')
     return filtered_texts
 
-#next: add images, videos, audio (return alt texts)
 def images(soup):
-    images = [img['alt'] for img in soup.find_all('img')]
-    print(f'Images of the page: {images}\n')
-    return images
+    img_tags = soup.find_all('img')
+    image_list = []
+    for img in img_tags:
+        alt_text = img.get('alt', '')
+        image_list.append(alt_text)
+    print(f'Images of the page: {image_list}')
+    return image_list
 
 def footer(soup):
     footer = soup.body.find('footer')
