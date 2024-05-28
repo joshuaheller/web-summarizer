@@ -23,4 +23,4 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-.env*
+.env
