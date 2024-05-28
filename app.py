@@ -21,6 +21,7 @@ website_content.title = parse.title(soup)
 website_content.headings = parse.headings(soup)
 website_content.footer = parse.footer(soup)
 website_content.texts = parse.texts(soup)
+website_content.images = parse.images(soup)
 
 website_content_dict = website_content.to_dict()
 

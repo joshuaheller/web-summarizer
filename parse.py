@@ -27,6 +27,12 @@ def texts(soup):
     print(f'Texts of the page after filtering: {filtered_texts}\n')
     return filtered_texts
 
+#next: add images, videos, audio (return alt texts)
+def images(soup):
+    images = [img['alt'] for img in soup.find_all('img')]
+    print(f'Images of the page: {images}\n')
+    return images
+
 def footer(soup):
     footer = soup.body.find('footer')
     if footer:
