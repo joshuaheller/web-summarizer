@@ -5,7 +5,7 @@ import summarize
 from website_content import WebsiteContent
 
 def run():
-    url = "https://imagetocaption.ai"
+    url = "C:\\Users\\JoshuaHeller\\Documents\\RAG\\sharepoint files\\Startseite\\Intranet – Homepage.html"
 
     html_content = get_html.request(url)
     soup = BeautifulSoup(html_content, 'html.parser')
