@@ -4,8 +4,11 @@ import scraper.html_fetcher as html_fetcher
 import parsing.html_parser as html_parser
 import llm.summarizer as summarize
 from models.website_content import WebsiteContent
+import os
+from dotenv import load_dotenv
 
-DEFAULT_FILE_PATH = "C:\\Users\\JoshuaHeller\\Documents\\RAG\\sharepoint files\\Startseite\\Intranet – Homepage.html"
+load_dotenv()
+DEFAULT_FILE_PATH = os.getenv('DEFAULT_FILE_PATH')
 
 def run(url=DEFAULT_FILE_PATH):
     html_content = html_fetcher.request(url)
