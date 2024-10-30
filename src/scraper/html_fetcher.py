@@ -88,7 +88,7 @@ def setup_chrome_options():
 def initialize_webdriver(options):
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
-    return driver.page_source
+    return driver
 
 # loads the URL and, if necessary, inserts a pause for the JavaScript content to load completely. This function isolates the loading logic and provides flexibility, e.g. when adjusting the waiting time.
 def load_page(driver, url):

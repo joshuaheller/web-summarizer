@@ -1,12 +1,13 @@
+import sys
 from bs4 import BeautifulSoup
 import scraper.html_fetcher as html_fetcher
 import parsing.html_parser as html_parser
 import llm.summarizer as summarize
 from models.website_content import WebsiteContent
 
-def run():
-    url = "C:\\Users\\JoshuaHeller\\Documents\\RAG\\sharepoint files\\Startseite\\Intranet – Homepage.html"
+DEFAULT_FILE_PATH = "C:\\Users\\JoshuaHeller\\Documents\\RAG\\sharepoint files\\Startseite\\Intranet – Homepage.html"
 
+def run(url=DEFAULT_FILE_PATH):
     html_content = html_fetcher.request(url)
     soup = BeautifulSoup(html_content, 'html.parser')
     body = soup.body
@@ -29,4 +30,6 @@ def run():
     summary = summarize.gpt(website_content_dict)
     print(summary)
 
-run()
+if __name__ == "__main__":
+    file_path = sys.argv[1] if len(sys.argv) > 1 else None
+    run(file_path) if file_path else run()
