@@ -7,6 +7,7 @@ import llm.summarizer as summarize
 from models.website_content import WebsiteContent
 import os
 from dotenv import load_dotenv
+import requests
 
 load_dotenv()
 DEFAULT_FILE_PATH = os.getenv('DEFAULT_FILE_PATH')
@@ -20,12 +21,19 @@ def run(url=DEFAULT_FILE_PATH, language=DEFAULT_LANGUAGE, summary_focus=None, su
     
 # Fetches HTML content and handles JavaScript-dependent pages
 def fetch_html_content(url):
-    html_content = html_fetcher.request(url)
-    soup = BeautifulSoup(html_content, 'html.parser')
-    if js_detection.check_javascript_needed(soup.body):
-        html_content = html_fetcher.request(url)
-        soup = BeautifulSoup(html_content, 'html.parser')
-    return soup
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # This will raise an exception for status codes 4XX/5XX
+        
+        if response.status_code == 200:
+            return BeautifulSoup(response.content, 'html.parser')
+        else:
+            print(f"Failed to retrieve the webpage. Status code: {response.status_code}")
+            return None
+            
+    except requests.RequestException as e:
+        print(f"Error fetching the webpage: {e}")
+        return None
 
 # Parses content from HTML and initializes WebsiteContent
 def parse_website_content(soup, url):
