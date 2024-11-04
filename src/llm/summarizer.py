@@ -28,8 +28,6 @@ def build_prompt(website_content, language, summary_focus=None, summary_length='
         prompt += ("Include: the name of the business or person that owns or operates the website, products/services offered, "
                "target audience (or potential target audience if not clearly stated), location of the company/person or their services/products, "
                "information about them, and all other general information.\n")
-        prompt += ("Return the summary of the brand/company/person in one extensive paragraph with the information you have been given. "
-               "If you have additional knowledge about the brand/company, add it to your summary.\n\n")
         
     # Focused summary
     if summary_focus:
@@ -59,7 +57,8 @@ def build_prompt(website_content, language, summary_focus=None, summary_length='
 # this function sends the prompt to the LLM and returns the response
 def gpt(website_content, language, summary_focus=None, summary_length='medium'):
     prompt = build_prompt(website_content, language, summary_focus, summary_length)
-    print(prompt)
+    # print(prompt)
+    # print("\n\n")
     completion = client.chat.completions.create(
     model="gpt-4o",
     messages=[
