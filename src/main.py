@@ -12,10 +12,10 @@ load_dotenv()
 DEFAULT_FILE_PATH = os.getenv('DEFAULT_FILE_PATH')
 DEFAULT_LANGUAGE = os.getenv('LANGUAGE', 'english')
 
-def run(url=DEFAULT_FILE_PATH, language=DEFAULT_LANGUAGE):
+def run(url=DEFAULT_FILE_PATH, language=DEFAULT_LANGUAGE, summary_focus=None, summary_length='medium'):
     soup = fetch_html_content(url)
     website_content_dict = parse_website_content(soup, url)
-    summary = summarize.gpt(website_content_dict, language)
+    summary = summarize.gpt(website_content_dict, language, summary_focus, summary_length)
     print(summary)
     
 # Fetches HTML content and handles JavaScript-dependent pages
@@ -44,5 +44,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Summarize website content.')
     parser.add_argument('url', nargs='?', default=DEFAULT_FILE_PATH, help='URL or file path of the website to summarize')
     parser.add_argument('--language', '-l', default=DEFAULT_LANGUAGE, help='Language of the summary (default: english)')
+    parser.add_argument('--focus', '-f', type=str, help='Focus area for the summary (e.g., "company", "product", "technology")')
+    parser.add_argument('--length', '-len', default='medium', choices=['small', 'medium', 'long', 'keypoints'], 
+                       help='Length of the summary (default: medium)')
     args = parser.parse_args()
-    run(args.url, args.language)
+    run(args.url, args.language, args.focus, args.length)

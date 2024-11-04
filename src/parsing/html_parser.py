@@ -1,17 +1,17 @@
 
 def language(soup):
     lang = soup.html.get('lang')
-    print(f'Language of the page: {lang}\n')
+    # print(f'Language of the page: {lang}\n')
     return lang
 
 def title(soup):
     title = soup.title.string
-    print(f'Title of the page: {title}\n')
+    # print(f'Title of the page: {title}\n')
     return title
 
 def headings(soup):
     headings = [heading.get_text() for heading in soup.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6'])]
-    print(f'Headings of the page: {headings}\n')
+    # print(f'Headings of the page: {headings}\n')
     return headings
 
 def texts(soup):
@@ -22,7 +22,7 @@ def texts(soup):
     texts = [text.get_text() for text in soup.find_all('p')]
 
     filtered_texts = filter_texts(texts)
-    print(f'Texts of the page after filtering: {filtered_texts}\n')
+    # print(f'Texts of the page after filtering: {filtered_texts}\n')
     return filtered_texts
 
 def images(soup):
@@ -31,7 +31,7 @@ def images(soup):
     for img in img_tags:
         alt_text = img.get('alt', '')
         image_list.append(alt_text)
-    print(f'Images of the page: {image_list}')
+    # print(f'Images of the page: {image_list}')
     return image_list
 
 def footer(soup):
@@ -39,7 +39,7 @@ def footer(soup):
     if footer:
         footer.extract()
         footer_text = [text.get_text() for text in footer.find_all('p')]
-        print(f'Footer : {footer_text}\n')
+        # print(f'Footer : {footer_text}\n')
         return footer_text
 
 def filter_texts(texts):
